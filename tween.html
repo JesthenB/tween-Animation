@@ -5,32 +5,47 @@
     <script>
       function init() {
         let stage = new createjs.Stage("canvas");
+
+        //create circle shape and specify color
         let circle = new createjs.Shape();
         circle.graphics.beginFill("Cyan").drawCircle(0, 0, 50);
+
+        //dimensions of circle
         circle.x = 100;
         circle.y = 100;
         stage.addChild(circle);
+        //add circle to the stage
         createjs.Tween.get(circle, { loop: true })
+        //attach tween  function to add animation to the circle
+        //use .to method to guide ball and use alpha to add a fading effect to the ball
+        //use ease class powinout so it can have an effect that will start slow go fast
           .to({ x: 1900 }, 3000, createjs.Ease.getPowInOut(4))
           .to({ alpha: 0, y: 855 }, 500, createjs.Ease.getPowInOut(2))
           .to({ alpha: 0, y: 500 }, 100)
           .to({ alpha: 1, y: 150 }, 500, createjs.Ease.getPowInOut(2))
           .to({ x: 100 }, 3000, createjs.Ease.getPowInOut(2));
+          //add ticker framerate and add tick event listener that will do a stage refresh once a tick is caught
         createjs.Ticker.setFPS(120);
         createjs.Ticker.addEventListener("tick", stage);
 
-        //create second circle that will be slightly behing the original
+        //create second circle that will be slightly behind the original
         let circle2 = new createjs.Shape();
         circle2.graphics.beginFill("red").drawCircle(0, 0, 50);
+        //dimensions of circle
         circle2.x = 100;
         circle2.y = 100;
+        //add circle to the stage
         stage.addChild(circle2);
+        //attach tween function to add animation to the circle
+        //use .to method to guide ball and use alpha to add a fading effect to the ball
+        //use ease class powinout so it can have an effect that will start slow go fast
         createjs.Tween.get(circle2, { loop: true })
           .to({ x: 1900 }, 3500, createjs.Ease.getPowInOut(4))
           .to({ alpha: 0, y: 855 }, 1000, createjs.Ease.getPowInOut(2))
           .to({ alpha: 0, y: 500 }, 150)
           .to({ alpha: 1, y: 150 }, 500, createjs.Ease.getPowInOut(2))
           .to({ x: 50 }, 3000, createjs.Ease.getPowInOut(2));
+          //add ticker framerate and add tick event listener that will do a stage refresh once a tick is caught
         createjs.Ticker.setFPS(120);
         createjs.Ticker.addEventListener("tick", stage);
       }
